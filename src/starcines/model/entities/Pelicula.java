@@ -39,7 +39,7 @@ public class Pelicula implements Serializable {
 	private String pelIdioma;
 
 	@Column(name="pel_imagen")
-	private byte[] pelImagen;
+	private String pelImagen;
 
 	@Column(name="pel_nombre")
 	private String pelNombre;
@@ -129,11 +129,11 @@ public class Pelicula implements Serializable {
 		this.pelIdioma = pelIdioma;
 	}
 
-	public byte[] getPelImagen() {
+	public String getPelImagen() {
 		return this.pelImagen;
 	}
 
-	public void setPelImagen(byte[] pelImagen) {
+	public void setPelImagen(String pelImagen) {
 		this.pelImagen = pelImagen;
 	}
 

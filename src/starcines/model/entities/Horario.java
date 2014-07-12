@@ -23,7 +23,7 @@ public class Horario implements Serializable {
 
 	//bi-directional many-to-one association to Cartelera
 	@ManyToOne
-	@JoinColumn(name="hor_car_id")
+	@JoinColumn(name="car_id")
 	private Cartelera cartelera;
 
 	public Horario() {
