@@ -58,7 +58,7 @@ public class ServiceMobileData extends HttpServlet {
 		String JSON = "[empty]";
 		if (metodo.equals("all")) {
 			try {
-				JSON = manager.getFullData();
+				JSON = all();
 			} catch (Exception e) {
 				System.out.print(e.getMessage());
 				//e.printStackTrace();
@@ -67,6 +67,17 @@ public class ServiceMobileData extends HttpServlet {
 		response.getWriter().write(JSON);
 		response.getWriter().close();
 	}
+	
+	
+	/**
+	 * Metodo ALL para busqueda de datos desde cartelera.
+	 * @return lista de carteeras.
+	**/
+	private String all() throws Exception
+	{
+		return manager.getFullData();
+	}
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
