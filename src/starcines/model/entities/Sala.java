@@ -1,7 +1,11 @@
 package starcines.model.entities;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.List;
 
 
@@ -26,6 +30,7 @@ public class Sala implements Serializable {
 
 	//bi-directional many-to-one association to Cartelera
 	@OneToMany(mappedBy="sala")
+	@JsonIgnore
 	private List<Cartelera> carteleras;
 
 	public Sala() {

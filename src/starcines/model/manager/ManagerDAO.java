@@ -2,21 +2,24 @@ package starcines.model.manager;
 
 import java.sql.Time;
 import java.util.List;
-import java.util.Timer;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+
+
+
+import com.fasterxml.jackson.core.json.*;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import starcines.model.entities.Cartelera;
 import starcines.model.entities.Genero;
 import starcines.model.entities.Horario;
 import starcines.model.entities.Sala;
 import starcines.model.entities.Usuario;
+import sun.org.mozilla.javascript.internal.json.JsonParser;
 
 public class ManagerDAO {
 
@@ -28,7 +31,7 @@ public class ManagerDAO {
 	 */
 	public ManagerDAO() {
 		if (emf == null)
-			emf = Persistence.createEntityManagerFactory("StarCines");
+			emf = Persistence.createEntityManagerFactory("StarCinesApp");
 		if (em == null)
 			em = emf.createEntityManager();
 	}
@@ -291,21 +294,26 @@ public class ManagerDAO {
 	
 	public String getFullData() throws Exception
 	{
-		
 		//Obtener datos de la BD.
-		Query q;
 		if (!em.getTransaction().isActive())
 			em.getTransaction().begin();
-		q = em.createQuery("SELECT p FROM "+Cartelera.class.getSimpleName()+" p");
+		List<Cartelera> lst = (List<Cartelera>) em.createQuery("SELECT p FROM "+Cartelera.class.getSimpleName()+" p").getResultList();
+		
+		//Instanciar las relaciones de cartelera.
+		for(Cartelera c : lst){
+			c.getHorarios();
+			c.getPelicula().getGeneros();
+		}
+		
 		if (em.getTransaction().isActive())
 			em.getTransaction().commit();
-		List<Cartelera> lst = (List<Cartelera>) q.getResultList();
 		
-		//API de google para generar JSON a partir de objetos java
-		GsonBuilder builder = new GsonBuilder();
-        Gson gson = builder.create();
-        String JSON = gson.toJson(lst);
-        System.out.println(JSON);
-        return JSON;
+		//trasnformar a JSON
+		String JSON="";
+		ObjectMapper mapper = new ObjectMapper();
+		JSON = mapper.writeValueAsString(lst);
+		
+		
+		return JSON;
 	}
 }

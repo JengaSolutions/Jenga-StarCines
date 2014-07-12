@@ -1,7 +1,11 @@
 package starcines.model.entities;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.List;
 
 
@@ -23,6 +27,7 @@ public class Genero implements Serializable {
 
 	//bi-directional many-to-many association to Pelicula
 	@ManyToMany(mappedBy="generos")
+	@JsonIgnore
 	private List<Pelicula> peliculas;
 
 	public Genero() {
