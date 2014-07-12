@@ -47,35 +47,34 @@ public class ManagerDAO {
 		}
 		
 		//metodo ingresar Usuario
-			 public void crearUsuario (String usu,String pass){
-				 em.getTransaction().begin();
-				 Usuario u = new Usuario();
-				 u.setUsuNick(usu);
-				 u.setUsuPass(pass);
-				 em.persist(u);
-				 em.getTransaction().commit();
-				 
-			 }
+		 public void crearUsuario (String usu,String pass){
+			 em.getTransaction().begin();
+			 Usuario u = new Usuario();
+			 u.setUsuNick(usu);
+			 u.setUsuPass(pass);
+			 em.persist(u);
+			 em.getTransaction().commit();
+	 }
 			 
 		//metodo para buscar un usuario por id
-			 public Usuario findByIdUsuario(String idUsuario){
-				 em.getTransaction().begin();
-				 Usuario u =em.find(Usuario.class, idUsuario);
-				 em.getTransaction().commit();
-				 return u;
-			 }
+		 public Usuario findByIdUsuario(String idUsuario){
+			 em.getTransaction().begin();
+			 Usuario u =em.find(Usuario.class, idUsuario);
+			 em.getTransaction().commit();
+			 return u;
+		 }
 
 		//metodo para actualizar un Usuario:
-			 public void actualizarUsuario(String usu,String pass){
-				 //buscamos el objeto que debe ser actualizado:
-				 Usuario u = findByIdUsuario(usu);
-				 em.getTransaction().begin();
-				 // no se actualiza la clave primaria, en este caso solo la descripcion
-				 u.setUsuNick(usu);
-				 u.setUsuPass(pass);
-				 em.merge(u);
-				 em.getTransaction().commit();
-			 }
+		 public void actualizarUsuario(String usu,String pass){
+			 //buscamos el objeto que debe ser actualizado:
+			 Usuario u = findByIdUsuario(usu);
+			 em.getTransaction().begin();
+			 // no se actualiza la clave primaria, en este caso solo la descripcion
+			 u.setUsuNick(usu);
+			 u.setUsuPass(pass);
+			 em.merge(u);
+			 em.getTransaction().commit();
+		 }
 			 
 		
 		//metodo para buscar por nombre
@@ -265,17 +264,17 @@ public class ManagerDAO {
 									 
 								
 								//metodo para buscar por horario
-									 public Horario findByNombreHorario(Time hora){
-											List<Horario> listado;
-											Horario h=null;
-											listado =findAllHorarios();
-											em.getTransaction().begin();
-											for (Horario us:listado){
-												if (us.getHorHora().equals(hora)){
-													h=us;
-												}
-											}
-											em.getTransaction().commit();
-											return h;
-										}
+					 public Horario findByNombreHorario(Time hora){
+						List<Horario> listado;
+						Horario h=null;
+						listado =findAllHorarios();
+						em.getTransaction().begin();
+						for (Horario us:listado){
+							if (us.getHorHora().equals(hora)){
+									h=us;
+								}
+						}
+						em.getTransaction().commit();
+						return h;
+				}
 }
