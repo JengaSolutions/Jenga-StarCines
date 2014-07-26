@@ -18,6 +18,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import starcines.model.entities.Cartelera;
 import starcines.model.entities.Genero;
 import starcines.model.entities.Horario;
+import starcines.model.entities.Pelicula;
 import starcines.model.entities.Sala;
 import starcines.model.entities.Usuario;
 import sun.org.mozilla.javascript.internal.json.JsonParser;
@@ -236,6 +237,141 @@ public class ManagerGestionApp {
 	 */
 	public void eliminarSala(Integer id) throws Exception{
 		manager.eliminar(Sala.class, id);
+	}
+	
+	//METODOS CRUD PARA PELICULAS
+	
+	/**
+	 * Metodo para listar todas las peliculas.
+	 * Hace uso del componente {@link starcines.model.manager.ManagerDAO}
+	 * @return
+	 */	
+	@SuppressWarnings("unchecked")
+	public List<Pelicula> findAllPelicula() {
+		return manager.findAll(Pelicula.class, "o.pel_fecha");
+	}
+	
+	/**
+	 * Metodo que busca una pelicula por el id.
+	 * Hace uso del componente {@link starcines.model.manager.ManagerDAO}
+	 * @param codigoPelicula
+	 * @return
+	 * @throws Exception
+	 */
+	public Pelicula findPeliculaById(Integer codigoPelicula) throws Exception {
+		return (Pelicula) manager.findById(Pelicula.class, codigoPelicula);
+	}
+	
+	/**
+	 * Metodo para crear peliculas.
+	 * Hace uso del componente {@link starcines.model.manager.ManagerDAO}
+	 * @param p
+	 * @throws Exception
+	 */
+	public void insertarPelicula(Pelicula p) throws Exception {
+		manager.insertar(p);
+	}
+	
+	/**
+	 * Metodo para actualizar campos de la tabla pelicula.
+	 * Hace uso del componente {@link starcines.model.manager.ManagerDAO}
+	 * @param pelicula
+	 * @throws Exception
+	 */
+	public void actualizarPelicula(Pelicula pelicula) throws Exception{
+		Pelicula p=null;
+		try{
+			p=findPeliculaById(pelicula.getPelId());
+			
+			p.setPelNombre(pelicula.getPelNombre());
+			p.setPelFecha(pelicula.getPelFecha());
+			p.setPelSinopsis(pelicula.getPelSinopsis());
+			p.setPelDuracion(pelicula.getPelDuracion());
+			p.setPelDirector(pelicula.getPelDirector());
+			p.setPelActores(pelicula.getPelActores());
+			p.setPelClasificacion(pelicula.getPelClasificacion());
+			p.setPelIdioma(pelicula.getPelIdioma());
+			p.setPelSubIdioma(pelicula.getPelSubIdioma());
+			p.setPelTrailer(pelicula.getPelTrailer());
+			p.setPelImagen(pelicula.getPelImagen());
+			manager.actualizar(p);
+		}catch(Exception e){
+			e.printStackTrace();
+			throw new Exception(e.getMessage());
+		}
+	}
+	
+	/**
+	 * Metodo para elimimar una pelicula.
+	 * Hace uso del componente {@link starcines.model.manager.ManagerDAO}
+	 * @param id
+	 * @throws Exception
+	 */
+	public void eliminarPelicula(Integer id) throws Exception{
+		manager.eliminar(Pelicula.class, id);
+	}
+	
+	//METODOS CRUD PARA HORARIO
+	
+	/**
+	 * Metodo para listar todos los horarios.
+	 * Hace uso del componente {@link starcines.model.manager.ManagerDAO}
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public List<Horario> findAllHorario() {
+		return manager.findAll(Horario.class, "o.hor_hora");
+	}
+	
+	/**
+	 * Metodo para buscar e horario por el id.
+	 * Hace uso del componente {@link starcines.model.manager.ManagerDAO}
+	 * @param codigoHorario
+	 * @return
+	 * @throws Exception
+	 */
+	public Horario findHorarioById(Integer codigoHorario) throws Exception {
+		return (Horario) manager.findById(Horario.class, codigoHorario);
+	}
+	
+	/**
+	 * Metodo para crear horarios.
+	 * Hace uso del componente {@link starcines.model.manager.ManagerDAO}
+	 * @param h
+	 * @throws Exception
+	 */
+	public void insertarHorario(Horario h) throws Exception {
+		manager.insertar(h);
+	}
+	
+	/**
+	 * Metodo para actualizar horario.
+	 * Hace uso del componente {@link starcines.model.manager.ManagerDAO}
+	 * @param horario
+	 * @throws Exception
+	 */
+	public void actualizarHorario(Horario horario) throws Exception{
+		Horario h=null;
+		try{
+			h=findHorarioById(horario.getHorId());
+			
+			h.setHorHora(horario.getHorHora());
+			
+			manager.actualizar(h);
+		}catch(Exception e){
+			e.printStackTrace();
+			throw new Exception(e.getMessage());
+		}
+	}
+	
+	/**
+	 * Metodo para eliminar horario.
+	 * Hace uso del componente {@link starcines.model.manager.ManagerDAO}
+	 * @param id
+	 * @throws Exception
+	 */
+	public void eliminarHorario(Integer id) throws Exception{
+		manager.eliminar(Horario.class, id);
 	}
 	
 	// METODOS PARA EL SERVICIO MOBIL
