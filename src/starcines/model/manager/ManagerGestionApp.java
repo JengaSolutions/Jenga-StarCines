@@ -46,13 +46,20 @@ public class ManagerGestionApp {
 
 	}
 
-	public void crearUsuario(String usu, String pass) {
-		em.getTransaction().begin();
+	/**
+	 * MEtodo para insertar nuevos usuarios a la BD.
+	 * @param usu
+	 * 			Nombre del usuario nuevo.
+	 * @param pass
+	 * 			Password del nuevo usuario.
+	 * @throws Exception
+	 * 			Problemas con la inserción en la BD.
+	 */
+	public void crearUsuario(String usu, String pass) throws Exception {
 		Usuario u = new Usuario();
 		u.setUsuNick(usu);
 		u.setUsuPass(pass);
-		em.persist(u);
-		em.getTransaction().commit();
+		manager.insertar(u);
 	}
 
 	// metodo para buscar un usuario por id
