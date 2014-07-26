@@ -10,11 +10,6 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-
-
-
-
-
 import com.fasterxml.jackson.core.json.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -27,35 +22,30 @@ import sun.org.mozilla.javascript.internal.json.JsonParser;
 
 public class ManagerGestionApp {
 
-	private static EntityManagerFactory emf;
-	private static EntityManager em;
+	private ManagerDAO manager;
 
 	/**
 	 * Default constructor.
 	 */
 	public ManagerGestionApp() {
-		if (emf == null)
-			emf = Persistence.createEntityManagerFactory("StarCinesApp");
-		if (em == null)
-			em = emf.createEntityManager();
+		manager = new ManagerDAO();
 	}
 
-	// Usuarios
-
-	// Listar Todos los Usuarios
+	/**
+	 * Metodo para la busqueda de usuarios dentro de la base de datos.
+	 * Hace uso del componente {@link starcines.model.manager.ManagerDAO}
+	 * @param orderBy
+	 * 			Parametro de orednacion de la lista de salida.
+	 * 			o.[columna de ordenacion]
+	 * @return
+	 * 		Retorna una lista con los clientes que existen en la base de datos.
+	 */
 	@SuppressWarnings("unchecked")
-	public List<Usuario> findAllUsuarios() {
-		List<Usuario> listado;
-		Query q;
-		em.getTransaction().begin();
-		q = em.createQuery("SELECT u FROM Usuario u ORDER BY u.usu_nick");
-		listado = q.getResultList();
-		em.getTransaction().commit();
-		return listado;
+	public List<Usuario> findAllUsuarios(String orderBy) {
+		return (List<Usuario>)manager.findAll(Usuario.class, orderBy);
 
 	}
 
-	// metodo ingresar Usuario
 	public void crearUsuario(String usu, String pass) {
 		em.getTransaction().begin();
 		Usuario u = new Usuario();
@@ -285,7 +275,7 @@ public class ManagerGestionApp {
 	// METODOS PARA EL SERVICIO MOBIL
 	/**
 	 * finder de todos los datos de la base de datos para el servicio mobil. HAce uso de la API de 
-	 * Google GSON para transformar los objetos a JSON.
+	 * Google GSON para transformar los objetos a JSON. Hace uso del componente {@link starcines.model.manager.ManagerDAO}
 	 * 
 	 * @param orderBy
 	 *            Expresion que indica la propiedad de la entidad por la que se
@@ -293,33 +283,24 @@ public class ManagerGestionApp {
 	 *            nombrar a la(s) propiedad(es) por la que se va a ordenar. 
 	 *            Puede aceptar null o una cadena vacia, en este caso no
 	 *            ordenara el resultado.
+	 *            
 	 * @return Cadena JSON con los resultadoa obtenidos.
-	 */
-	
+	 */	
+	@SuppressWarnings("unchecked")
 	public String getFullData() throws Exception
-	{
-		//Obtener datos de la BD.
-		if (!em.getTransaction().isActive())
-			em.getTransaction().begin();
-		List<Cartelera> lst = (List<Cartelera>) em.createQuery("SELECT p FROM "+Cartelera.class.getSimpleName()+" p").getResultList();
-		
+	{	
+		List<Cartelera> lst = (List<Cartelera>)manager.findAll(Cartelera.class, null );
 		//Instanciar las relaciones de cartelera.
 		for(Cartelera c : lst){
 			c.getHorarios();
 			c.getPelicula().getGeneros();
 		}
-		
-		if (em.getTransaction().isActive())
-			em.getTransaction().commit();
-		
 		//trasnformar a JSON
 		String JSON="";
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.setDateFormat(df);
-		JSON = mapper.writeValueAsString(lst);
-		
-		
+		JSON = mapper.writeValueAsString(lst);	
 		return JSON;
 	}
 }
