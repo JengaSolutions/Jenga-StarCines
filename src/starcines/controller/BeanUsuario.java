@@ -23,7 +23,7 @@ public class BeanUsuario {
 	
 	public void actionLista()
 	{
-		lista = (List<Usuario>)manager.findAllUsuarios();	
+		lista = (List<Usuario>)manager.findAllUsuarios(null);	
 	}
 
 	public List<Usuario> getLista() {
