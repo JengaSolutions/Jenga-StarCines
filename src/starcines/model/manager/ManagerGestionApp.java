@@ -1,19 +1,8 @@
 package starcines.model.manager;
 
-import java.sql.Time;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.Query;
-
-import org.apache.tomcat.util.buf.UDecoder;
-
-import com.fasterxml.jackson.core.json.*;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import starcines.model.entities.Cartelera;
 import starcines.model.entities.Genero;
@@ -21,7 +10,8 @@ import starcines.model.entities.Horario;
 import starcines.model.entities.Pelicula;
 import starcines.model.entities.Sala;
 import starcines.model.entities.Usuario;
-import sun.org.mozilla.javascript.internal.json.JsonParser;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class ManagerGestionApp {
 
@@ -46,8 +36,8 @@ public class ManagerGestionApp {
 	 * 		Retorna una lista con los clientes que existen en la base de datos.
 	 */
 	@SuppressWarnings("unchecked")
-	public List<Usuario> findAllUsuarios(String orderBy) {
-		return (List<Usuario>)manager.findAll(Usuario.class, orderBy);
+	public List<Usuario> findAllUsuarios() {
+		return manager.findAll(Usuario.class, "o.usu_nick");
 
 	}
 
@@ -374,6 +364,69 @@ public class ManagerGestionApp {
 		manager.eliminar(Horario.class, id);
 	}
 	
+	//METODOS CRUD PARA CARTELERA
+	
+	/**
+	 * Metodo para listar todas las carteleras.
+	 * Hace uso del componente {@link starcines.model.manager.ManagerDAO}
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public List<Cartelera> findAllCartelera() {
+		return manager.findAll(Cartelera.class, "o.car_id");
+	}
+	
+	/**
+	 * Metodo para buscar una cartelera por el id.
+	 * Hace uso del componente {@link starcines.model.manager.ManagerDAO}
+	 * @param codigoCartelera
+	 * @return
+	 * @throws Exception
+	 */
+	public Cartelera findCarteleraById(Integer codigoCartelera) throws Exception {
+		return (Cartelera) manager.findById(Cartelera.class, codigoCartelera);
+	}
+	
+	
+	/**
+	 * Metodo para insertar carteleras.
+	 * Hace uso del componente {@link starcines.model.manager.ManagerDAO}
+	 * @param c
+	 * @throws Exception
+	 */
+	public void insertarCartelera(Cartelera c) throws Exception {
+		manager.insertar(c);
+	}
+	
+	/**
+	 * Metodo para actualizar carteleras.
+	 * Hace uso del componente {@link starcines.model.manager.ManagerDAO}
+	 * @param cartelera
+	 * @throws Exception
+	 */
+	public void actualizarCartelera(Cartelera cartelera) throws Exception{
+		Cartelera c=null;
+		try{
+			c=findCarteleraById(cartelera.getCarId());
+			
+			c.setCarDesde(cartelera.getCarDesde());
+			c.setCarHasta(cartelera.getCarHasta());
+			manager.actualizar(c);
+		}catch(Exception e){
+			e.printStackTrace();
+			throw new Exception(e.getMessage());
+		}
+	}
+	
+	/**
+	 * Metodo para eliminar una cartelera.
+	 * Hace uso del componente {@link starcines.model.manager.ManagerDAO}
+	 * @param id
+	 * @throws Exception
+	 */
+	public void eliminarCartelera(Integer id) throws Exception{
+		manager.eliminar(Cartelera.class, id);
+	}
 	// METODOS PARA EL SERVICIO MOBIL
 	/**
 	 * finder de todos los datos de la base de datos para el servicio mobil. HAce uso de la API de 
