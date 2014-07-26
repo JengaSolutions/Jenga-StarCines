@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import starcines.model.manager.ManagerDAO;
+import starcines.model.manager.ManagerGestionApp;
 
 /**
  * Servlet implementation class ServiceMobileData
@@ -17,14 +17,14 @@ import starcines.model.manager.ManagerDAO;
 public class ServiceMobileData extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	private ManagerDAO manager;
+	private ManagerGestionApp manager;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
 	public ServiceMobileData() {
 		super();
-		manager = new ManagerDAO();
+		manager = new ManagerGestionApp();
 	}
 
 	/**
@@ -43,6 +43,14 @@ public class ServiceMobileData extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		
+		//agregar funcuinalidad de cross domain para ajax
+		response.addHeader("Access-Control-Allow-Origin", "*");
+	    response.addHeader("Access-Control-Allow-Methods", "GET, PUT, POST, OPTIONS, DELETE");
+	    response.addHeader("Access-Control-Allow-Headers", "Content-Type");
+	    response.addHeader("Access-Control-Max-Age", "86400");
+		//
+		
 		// obetenr nombre de usuario.
 		String usuario = request.getParameter("u");
 		// verificar usuario.

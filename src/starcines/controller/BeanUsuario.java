@@ -6,19 +6,19 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 import starcines.model.entities.Usuario;
-import starcines.model.manager.ManagerDAO;
+import starcines.model.manager.ManagerGestionApp;
 
 
 @SessionScoped
 @ManagedBean
 public class BeanUsuario {
 	
-	private ManagerDAO manager;
+	private ManagerGestionApp manager;
 	private List<Usuario> lista;
 	
 	
 	public BeanUsuario() {
-		manager = new ManagerDAO();
+		manager = new ManagerGestionApp();
 	}
 	
 	public void actionLista()
