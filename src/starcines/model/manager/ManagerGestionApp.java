@@ -174,6 +174,70 @@ public class ManagerGestionApp {
 		manager.eliminar(Genero.class, id);
 	}
 	
+	
+	//METODOS CRUD PARA SALAS
+	
+	/**
+	 * Metodo para listar salas.
+	 * Hace uso del componente {@link starcines.model.manager.ManagerDAO}
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public List<Sala> findAllSalas() {
+		return manager.findAll(Sala.class, "o.sal_nombre");
+	}
+	
+	/**
+	 * Metodo para buscar la sal por el id.
+	 * Hace uso del componente {@link starcines.model.manager.ManagerDAO}
+	 * @param codigoSala
+	 * @return
+	 * @throws Exception
+	 */
+	public Sala findSalaById(Integer codigoSala) throws Exception {
+		return (Sala) manager.findById(Sala.class, codigoSala);
+	}
+	
+	/**
+	 * Metodo para crear salas dentro de la BD.
+	 * Hace uso del componente {@link starcines.model.manager.ManagerDAO}
+	 * @param s
+	 * @throws Exception
+	 */
+	public void insertarSala(Sala s) throws Exception {
+		manager.insertar(s);
+	}
+	
+	/**
+	 * Metodo para actualizar salas.
+	 * Hace uso del componente {@link starcines.model.manager.ManagerDAO}
+	 * @param sala
+	 * @throws Exception
+	 */
+	public void actualizarSala(Sala sala) throws Exception{
+		Sala s=null;
+		try{
+			s=findSalaById(sala.getSalId());
+			
+			s.setSalNombre(sala.getSalNombre());;
+			s.setSalFormato(sala.getSalFormato());
+			manager.actualizar(s);
+		}catch(Exception e){
+			e.printStackTrace();
+			throw new Exception(e.getMessage());
+		}
+	}
+	
+	/**
+	 * Metodo para eliminar Sala.
+	 * Hace uso del componente {@link starcines.model.manager.ManagerDAO}
+	 * @param id
+	 * @throws Exception
+	 */
+	public void eliminarSala(Integer id) throws Exception{
+		manager.eliminar(Sala.class, id);
+	}
+	
 	// METODOS PARA EL SERVICIO MOBIL
 	/**
 	 * finder de todos los datos de la base de datos para el servicio mobil. HAce uso de la API de 
