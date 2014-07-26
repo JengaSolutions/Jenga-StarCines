@@ -16,6 +16,8 @@ public class Cartelera implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@SequenceGenerator(name="CARTELERA_CARID_GENERATOR", sequenceName="CARTELERA_CAR_ID_SEQ",allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="CARTELERA_CARID_GENERATOR")
 	@Column(name="car_id")
 	private Integer carId;
 

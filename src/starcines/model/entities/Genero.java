@@ -1,11 +1,7 @@
 package starcines.model.entities;
 
 import java.io.Serializable;
-
 import javax.persistence.*;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import java.util.List;
 
 
@@ -19,6 +15,8 @@ public class Genero implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@SequenceGenerator(name="GENERO_GENID_GENERATOR", sequenceName="GENERO_GEN_ID_SEQ",allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="GENERO_GENID_GENERATOR")
 	@Column(name="gen_id")
 	private Integer genId;
 
@@ -27,7 +25,6 @@ public class Genero implements Serializable {
 
 	//bi-directional many-to-many association to Pelicula
 	@ManyToMany(mappedBy="generos")
-	@JsonIgnore
 	private List<Pelicula> peliculas;
 
 	public Genero() {

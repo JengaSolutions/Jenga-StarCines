@@ -1,14 +1,9 @@
 package starcines.model.entities;
 
 import java.io.Serializable;
-
 import javax.persistence.*;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import java.util.Date;
 import java.util.List;
-
 
 
 /**
@@ -21,6 +16,8 @@ public class Pelicula implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@SequenceGenerator(name="PELICULA_PELID_GENERATOR", sequenceName="PELICULA_PEL_ID_SEQ",allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="PELICULA_PELID_GENERATOR")
 	@Column(name="pel_id")
 	private Integer pelId;
 
@@ -60,12 +57,10 @@ public class Pelicula implements Serializable {
 
 	//bi-directional many-to-one association to Cartelera
 	@OneToMany(mappedBy="pelicula")
-	@JsonIgnore
 	private List<Cartelera> carteleras;
 
 	//bi-directional many-to-many association to Genero
 	@ManyToMany
-
 	@JoinTable(
 		name="genero_x_pelicula"
 		, joinColumns={

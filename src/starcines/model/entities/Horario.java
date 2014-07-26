@@ -15,6 +15,8 @@ public class Horario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@SequenceGenerator(name="HORARIO_HORID_GENERATOR", sequenceName="HORARIO_HOR_ID_SEQ",allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="HORARIO_HORID_GENERATOR")
 	@Column(name="hor_id")
 	private Integer horId;
 
@@ -23,7 +25,7 @@ public class Horario implements Serializable {
 
 	//bi-directional many-to-one association to Cartelera
 	@ManyToOne
-	@JoinColumn(name="hor_car_id")
+	@JoinColumn(name="car_id")
 	private Cartelera cartelera;
 
 	public Horario() {

@@ -1,11 +1,7 @@
 package starcines.model.entities;
 
 import java.io.Serializable;
-
 import javax.persistence.*;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import java.util.List;
 
 
@@ -19,6 +15,8 @@ public class Sala implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@SequenceGenerator(name="SALA_SALID_GENERATOR", sequenceName="SALA_SAL_ID_SEQ",allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SALA_SALID_GENERATOR")
 	@Column(name="sal_id")
 	private Integer salId;
 
@@ -30,7 +28,6 @@ public class Sala implements Serializable {
 
 	//bi-directional many-to-one association to Cartelera
 	@OneToMany(mappedBy="sala")
-	@JsonIgnore
 	private List<Cartelera> carteleras;
 
 	public Sala() {

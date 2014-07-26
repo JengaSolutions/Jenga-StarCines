@@ -32,6 +32,8 @@ public class ManagerGestionApp {
 	public ManagerGestionApp() {
 		manager = new ManagerDAO();
 	}
+	
+	//CRUD PARA USUARIOS
 
 	/**
 	 * Metodo para la busqueda de usuarios dentro de la base de datos.
@@ -49,19 +51,14 @@ public class ManagerGestionApp {
 	}
 
 	/**
-	 * Metodo para insertar nuevos usuarios a la BD.
+	 * Metodo que crear usuarios dentro de la BD.
 	 * Hace uso del componente {@link starcines.model.manager.ManagerDAO}
-	 * @param usu
-	 * 			Nombre del usuario nuevo.
-	 * @param pass
-	 * 			Password del nuevo usuario.
+	 * @param u
+	 * 			usuario
 	 * @throws Exception
-	 * 			Problemas con la inserción en la BD.
+	 * 		problema al crear usuarios
 	 */
-	public void crearUsuario(String usu, String pass) throws Exception {
-		Usuario u = new Usuario();
-		u.setUsuNick(usu);
-		u.setUsuPass(pass);
+	public void crearUsuario(Usuario u) throws Exception {
 		manager.insertar(u);
 	}
 
@@ -80,19 +77,102 @@ public class ManagerGestionApp {
 	}
 
 	/**
-	 * Metodo que actualiza usuarios dentro de la BD
-	 * Haciendo uso del componete 
-	 * @param usu
-	 * @param pass
+	 * Metodo que actualiza un usuario en la BD.
+	 * Hace uso del componente {@link starcines.model.manager.ManagerDAO}
+	 * @param usuario
 	 * @throws Exception
 	 */
-	public void actualizarUsuario(String usu, String pass) throws Exception{
-		Usuario u=new Usuario();
-		u.setUsuNick(usu);
-		u.setUsuPass(pass);
-		manager.actualizar(u);
+	public void actualizarUsuario(Usuario usuario) throws Exception{
+		Usuario u=null;
+		try{
+			u=findByIdUsuario(usuario.getUsuNick());
+			
+			u.setUsuNick(usuario.getUsuNick());
+			u.setUsuPass(usuario.getUsuPass());
+			manager.actualizar(u);
+		}catch(Exception e){
+			e.printStackTrace();
+			throw new Exception(e.getMessage());
+		}
+		
 	}
 
+	/**
+	 * Metodo que elimina un usuario por el nick dentro de la BD.
+	 * Hace uso del componente {@link starcines.model.manager.ManagerDAO}
+	 * @param nick
+	 * 			nombre de usuario
+	 * @throws Exception
+	 */
+	public void eliminarUsuario(String nick) throws Exception{
+		manager.eliminar(Usuario.class, nick);
+	}
+	
+	//METODOS CRUD PARA GENERO
+	
+	/**
+	 * Metodo para listar todos los generos de peliculas.
+	 * Hace uso del componente {@link starcines.model.manager.ManagerDAO}
+	 * @return
+	 * 		lista de generos
+	 */
+	@SuppressWarnings("unchecked")
+	public List<Genero> findAllGeneros() {
+		return manager.findAll(Genero.class, "o.gen_id");
+	}
+	
+	/**
+	 * Metodo para listar todos los generos de peliculas.
+	 * Hace uso del componente {@link starcines.model.manager.ManagerDAO}
+	 * @param codigoGenero
+	 * 			codigo del genero
+	 * @return
+	 * 			retorna un genero mediante el id
+	 * @throws Exception
+	 * 			problema al buscar el genero
+	 */
+	public Genero findGeneroById(Integer codigoGenero) throws Exception {
+		return (Genero) manager.findById(Genero.class, codigoGenero);
+	}
+	
+	/**
+	 * Metodo para crear generos.
+	 * Hace uso del componente {@link starcines.model.manager.ManagerDAO}
+	 * @param g
+	 * @throws Exception
+	 */
+	public void insertarGenero(Genero g) throws Exception {
+		manager.insertar(g);
+	}
+	
+	/**
+	 * Metodo para actualizar genero dentro de la BD.
+	 * Hace uso del componente {@link starcines.model.manager.ManagerDAO}
+	 * @param genero
+	 * @throws Exception
+	 */
+	public void actualizarGenero(Genero genero) throws Exception{
+		Genero g=null;
+		try{
+			g=findGeneroById(genero.getGenId());
+			
+			g.setGenTipo(genero.getGenTipo());
+			manager.actualizar(g);
+		}catch(Exception e){
+			e.printStackTrace();
+			throw new Exception(e.getMessage());
+		}
+	}
+	
+	/**
+	 * Metodo para eliminar un genero por el id.
+	 * Hace uso del componente {@link starcines.model.manager.ManagerDAO}
+	 * @param id
+	 * @throws Exception
+	 */
+	public void eliminarGenero(Integer id) throws Exception{
+		manager.eliminar(Genero.class, id);
+	}
 	
 	// METODOS PARA EL SERVICIO MOBIL
 	/**
