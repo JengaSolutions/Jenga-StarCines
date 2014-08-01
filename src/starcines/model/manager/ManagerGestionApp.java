@@ -37,7 +37,7 @@ public class ManagerGestionApp {
 	 */
 	@SuppressWarnings("unchecked")
 	public List<Usuario> findAllUsuarios() {
-		return manager.findAll(Usuario.class, "o.usu_nick");
+		return manager.findAll(Usuario.class, "o.usuNick");
 
 	}
 
@@ -109,7 +109,7 @@ public class ManagerGestionApp {
 	 */
 	@SuppressWarnings("unchecked")
 	public List<Genero> findAllGeneros() {
-		return manager.findAll(Genero.class, "o.gen_id");
+		return manager.findAll(Genero.class, "o.genId");
 	}
 	
 	/**
@@ -175,7 +175,7 @@ public class ManagerGestionApp {
 	 */
 	@SuppressWarnings("unchecked")
 	public List<Sala> findAllSalas() {
-		return manager.findAll(Sala.class, "o.sal_nombre");
+		return manager.findAll(Sala.class, "o.salNombre");
 	}
 	
 	/**
@@ -238,7 +238,7 @@ public class ManagerGestionApp {
 	 */	
 	@SuppressWarnings("unchecked")
 	public List<Pelicula> findAllPelicula() {
-		return manager.findAll(Pelicula.class, "o.pel_fecha");
+		return manager.findAll(Pelicula.class, "o.pelFecha");
 	}
 	
 	/**
@@ -310,7 +310,7 @@ public class ManagerGestionApp {
 	 */
 	@SuppressWarnings("unchecked")
 	public List<Horario> findAllHorario() {
-		return manager.findAll(Horario.class, "o.hor_hora");
+		return manager.findAll(Horario.class, "o.horHora");
 	}
 	
 	/**
@@ -373,7 +373,7 @@ public class ManagerGestionApp {
 	 */
 	@SuppressWarnings("unchecked")
 	public List<Cartelera> findAllCartelera() {
-		return manager.findAll(Cartelera.class, "o.car_id");
+		return manager.findAll(Cartelera.class, "o.carId");
 	}
 	
 	/**
@@ -407,8 +407,7 @@ public class ManagerGestionApp {
 	public void actualizarCartelera(Cartelera cartelera) throws Exception{
 		Cartelera c=null;
 		try{
-			c=findCarteleraById(cartelera.getCarId());
-			
+			c=findCarteleraById(cartelera.getCarId());			
 			c.setCarDesde(cartelera.getCarDesde());
 			c.setCarHasta(cartelera.getCarHasta());
 			manager.actualizar(c);
