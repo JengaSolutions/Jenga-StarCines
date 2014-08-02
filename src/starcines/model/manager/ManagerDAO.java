@@ -21,7 +21,7 @@ public class ManagerDAO {
 	 */
 	public ManagerDAO() {
 		if (factory == null)
-			factory = Persistence.createEntityManagerFactory("StarCinesApp");
+			factory = Persistence.createEntityManagerFactory("Jenga-StarCines");
 		if (em == null)
 			em = factory.createEntityManager();
 	}

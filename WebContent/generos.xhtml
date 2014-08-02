@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:p="http://primefaces.org/ui">
+<h:head>
+<h:outputStylesheet library="css" name="styles.css" />
+<title>Generos</title>
+</h:head>
+<body style="font-size:70%">
+<h2>Listado de Generos</h2>
+<h:form id="form1">
+<h:commandLink action="index" value="Ir al inicio..." />
+</h:form>
+<h:form id="form2">
+<p:panel id="panel1" header="Genero">
+<p:messages id="mensajes"/>
+<p:panelGrid columns="2">
+<h:outputText value="Genero" />
+<p:inputText value="#{backingGenero.genero}" required="true" />
+</p:panelGrid>
+<p:commandButton value="Insertar" update="panel1 :form3:tablaGeneros"
+action="#{backingGenero.accionInsertar()}" icon="ui-icon-disk" />
+</p:panel>
+</h:form>
+<h:form id="form3">
+<p:dataTable value="#{backingGenero.listaGeneros}"
+var="p" id="tablaGeneros" paginator="true" rows="4">
+<p:column headerText="ID">
+<h:outputText value="#{p.genId}" />
+</p:column>
+<p:column headerText="Genero">
+<h:outputText value="#{p.genTipo}" />
+</p:column>
+<p:column headerText="eliminar">
+<p:commandButton action="#{backingGenero.accionEliminar(p)}" icon="ui-icon-close"
+update="tablaGeneros"/>
+</p:column>
+<p:column headerText="actualizar">
+<p:commandButton action="#{backingGenero.accionCargar(p)}" icon="ui-icon-comment"/>
+</p:column>
+</p:dataTable>
+</h:form>
+</body>
+</html>

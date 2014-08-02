@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:p="http://primefaces.org/ui">
+<h:head>
+<h:outputStylesheet library="css" name="styles.css" />
+<title>Salas</title>
+</h:head>
+<body style="font-size:70%">
+<h2>Listado de Salas</h2>
+<h:form id="form1">
+<h:commandLink action="index" value="Ir al inicio..." />
+</h:form>
+<h:form id="form2">
+<p:panel id="panel1" header="Sala">
+<p:messages id="mensajes"/>
+<p:panelGrid columns="2">
+<h:outputText value="Nombre de la sala" />
+<p:inputText value="#{backingSala.nombre}" required="true" />
+<h:outputText value="Formato de la sala" />
+<p:inputText value="#{backingSala.formato}" required="true" />
+</p:panelGrid>
+<p:commandButton value="Insertar" update="panel1 :form3:tablaSalas"
+action="#{backingSala.accionInsertar()}" icon="ui-icon-disk" />
+</p:panel>
+</h:form>
+<h:form id="form3">
+<p:dataTable value="#{backingSala.listaSalas}"
+var="p" id="tablaSalas" paginator="true" rows="5">
+<p:column headerText="ID">
+<h:outputText value="#{p.salId}" />
+</p:column>
+<p:column headerText="Nombre">
+<h:outputText value="#{p.salNombre}" />
+</p:column>
+<p:column headerText="Formato">
+<h:outputText value="#{p.salFormato}" />
+</p:column>
+<p:column headerText="eliminar">
+<p:commandButton action="#{backingSala.accionEliminar(p)}" icon="ui-icon-close"
+update="tablaSalas"/>
+</p:column>
+<p:column headerText="actualizar">
+<p:commandButton action="#{backingSala.accionCargar(p)}" icon="ui-icon-comment"/>
+</p:column>
+</p:dataTable>
+</h:form>
+</body>
+</html>

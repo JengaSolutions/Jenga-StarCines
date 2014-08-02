@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:p="http://primefaces.org/ui">
+<h:head>
+<title>Peliculas</title>
+</h:head>
+<body style="font-size:70%">
+<h:form id="form1">
+<p:panel header="Actualizacion de peliculas">
+<p:panelGrid columns="2">
+<h:outputText value="ID" />
+<h:panelGroup>
+<h:outputText value="#{backingPelicula.id}" />
+<h:inputHidden value="#{backingPelicula.id}" />
+</h:panelGroup>
+<h:outputText value="Nombre" />
+<p:inputText value="#{backingPelicula.nombre}" required="true" />
+<h:outputText value="Fecha" />
+<p:calendar value="#{backingPelicula.fecha}" mode="popup"
+showOn="button" popupIconOnly="true" />
+<h:outputText value="Sinopsis" />
+<p:inputText value="#{backingPelicula.sinopsis}" required="true" />
+<h:outputText value="Duracion" />
+<p:inputText value="#{backingPelicula.duracion}" required="true" />
+<h:outputText value="Director" />
+<p:inputText value="#{backingPelicula.director}" required="true" />
+<h:outputText value="Actores" />
+<p:inputText value="#{backingPelicula.actores}" required="true" />
+<h:outputText value="Clasificacion" />
+<p:inputText value="#{backingPelicula.clasificacion}" required="true" />
+<h:outputText value="Idioma" />
+<p:inputText value="#{backingPelicula.idioma}" required="true" />
+<h:outputText value="Subidioma" />
+<p:inputText value="#{backingPelicula.subidioma}" required="true" />
+<h:outputText value="Trailer" />
+<p:inputText value="#{backingPelicula.trailer}" required="true" />
+<h:outputText value="Portada" />
+<p:fileUpload fileUploadListener="#{backingPelicula.imagen}"
+allowTypes="/(\.|\/)(gif|jpe?g|png)$/" description="Seleccionar imagenes"/>
+</p:panelGrid>
+<p:commandButton value="Actualizar"
+action="#{backingPelicula.accionActualizar}" />
+<p:messages />
+</p:panelGrid>
+</p:panel>
+</h:form>
+</body>
+</html>

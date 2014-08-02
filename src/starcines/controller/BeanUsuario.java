@@ -16,6 +16,7 @@ import starcines.model.manager.ManagerGestionApp;
 public class BeanUsuario {
 	
 	private ManagerGestionApp manager;
+	
 	private String nick;
 	public String getNick() {
 		return nick;

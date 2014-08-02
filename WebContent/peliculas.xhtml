@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:p="http://primefaces.org/ui">
+<h:head>
+<h:outputStylesheet library="css" name="styles.css" />
+<title>Peliculas</title>
+</h:head>
+<body style="font-size:70%">
+<h2>Listado de Peliculas</h2>
+<h:form id="form1">
+<h:commandLink action="index" value="Ir al inicio..." />
+</h:form>
+<h:form id="form2">
+<p:panel id="panel1" header="Sala">
+<p:messages id="mensajes"/>
+<p:panelGrid columns="2">
+<h:outputText value="Nombre" />
+<p:inputText value="#{backingPelicula.nombre}" required="true" />
+<h:outputText value="Fecha" />
+<p:calendar value="#{backingPelicula.fecha}" mode="popup"
+showOn="button" popupIconOnly="true" />
+<h:outputText value="Sinopsis" />
+<p:inputText value="#{backingPelicula.sinopsis}" required="true" />
+<h:outputText value="Duracion" />
+<p:inputText value="#{backingPelicula.duracion}" required="true" />
+<h:outputText value="Director" />
+<p:inputText value="#{backingPelicula.director}" required="true" />
+<h:outputText value="Actores" />
+<p:inputText value="#{backingPelicula.actores}" required="true" />
+<h:outputText value="Clasificacion" />
+<p:inputText value="#{backingPelicula.clasificacion}" required="true" />
+<h:outputText value="Idioma" />
+<p:inputText value="#{backingPelicula.idioma}" required="true" />
+<h:outputText value="Subidioma" />
+<p:inputText value="#{backingPelicula.subidioma}" required="true" />
+<h:outputText value="Trailer" />
+<p:inputText value="#{backingPelicula.trailer}" required="true" />
+<h:outputText value="Portada" />
+<p:fileUpload fileUploadListener="#{backingPelicula.imagen}"
+allowTypes="/(\.|\/)(gif|jpe?g|png)$/" description="Seleccionar imagenes"/>
+</p:panelGrid>
+<p:commandButton value="Insertar" update="panel1 :form3:tablaPeliculas"
+action="#{backingPelicula.accionInsertar()}" icon="ui-icon-disk" />
+</p:panel>
+</h:form>
+<h:form id="form3">
+<p:dataTable value="#{backingPelicula.listaPeliculas}"
+var="p" id="tablaPeliculas" paginator="true" rows="5">
+<p:column headerText="ID">
+<h:outputText value="#{p.pelId}" />
+</p:column>
+<p:column headerText="Nombre">
+<h:outputText value="#{p.pelNombre}" />
+</p:column>
+<p:column headerText="Fecha">
+<h:outputText value="#{p.pelFecha}" />
+</p:column>
+<p:column headerText="Sinopsis">
+<h:outputText value="#{p.pelSinopsis}" />
+</p:column>
+<p:column headerText="Duracion">
+<h:outputText value="#{p.pelDuracion}" />
+</p:column>
+<p:column headerText="Director">
+<h:outputText value="#{p.pelDirector}" />
+</p:column>
+<p:column headerText="Actores">
+<h:outputText value="#{p.pelActores}" />
+</p:column>
+<p:column headerText="Clasificacion">
+<h:outputText value="#{p.pelClasificacion}" />
+</p:column>
+<p:column headerText="Idioma">
+<h:outputText value="#{p.pelIdioma}" />
+</p:column>
+<p:column headerText="Subidioma">
+<h:outputText value="#{p.pelSubIdioma}" />
+</p:column>
+<p:column headerText="Trailer">
+<h:outputText value="#{p.pelTrailer}" />
+</p:column>
+<p:column headerText="eliminar">
+<p:commandButton action="#{backingPelicula.accionEliminar(p)}" icon="ui-icon-close"
+update="tablaPeliculas"/>
+</p:column>
+<p:column headerText="actualizar">
+<p:commandButton action="#{backingPelicula.accionCargar(p)}" icon="ui-icon-comment"/>
+</p:column>
+</p:dataTable>
+</h:form>
+</body>
+</html>
