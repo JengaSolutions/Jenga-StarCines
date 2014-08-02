@@ -1,27 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
-
-	<h:head></h:head>
-	<h:body>
-		<center>
-					<h:graphicImage id="image" alt="jsf-logo" url="/img/StarCines-logo.png" width="600px" height="200">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<h:outputStylesheet library="css" name="styles.css" />
+	<title>StarCines</title>
+</h:head>
+<h:body style="font-size:70%">
+	<h:form>
+		<p:panel header="Sistema">
+			<h:panelGrid columns="2">
+				<p:menu>
+					<p:submenu label="Opciones del sistema">
+						<p:menuitem value="Generos" outcome="generos"
+							icon="ui-icon-pencil" />
+							<p:menuitem value="Salas" outcome="salas"
+							icon="ui-icon-pencil" />
+							<p:menuitem value="Peliculas" outcome="peliculas"
+							icon="ui-icon-pencil" />
+							<p:menuitem value="Carteleras" outcome="carteleras"
+							icon="ui-icon-pencil" />							
+					</p:submenu>					
+				</p:menu>
+				<p:panel>
+					<center>
+	<h:graphicImage id="image" alt="jsf-logo" url="/img/StarCines-logo.png" width="350px" height="140px">
 					</h:graphicImage>
-					</center>  
-		<h:outputText value="Generar Lista" />
-		<h:form>
-		<p:commandButton value="Generar" update=":tabla" action="#{beanUsuario.actionLista()}"/>
-		</h:form>
-		
-		<p:dataTable id="tabla" value="#{beanUsuario.lista}" var="p">
-		<p:column>
-			<h:outputText value="#{p.usuNick}" />
-		</p:column>
-		<p:column>
-			<h:outputText value="#{p.usuPass}" />
-		</p:column>
-		</p:dataTable>
-	</h:body>
+	</center>
+				</p:panel>
+			</h:panelGrid>
+		</p:panel>
+	</h:form>
+</h:body>
 </html>
