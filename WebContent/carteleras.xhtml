@@ -11,11 +11,11 @@ xmlns:p="http://primefaces.org/ui">
 <body style="font-size:70%">
 <h2>Listado de Carteleras</h2>
 <h:form id="form1">
-<h:commandLink action="index" value="Ir al inicio..." />
 </h:form>
 <h:form id="form2">
-<p:panel id="panel1" header="Cartelera">
-<p:messages id="mensajes"/>
+<p:fieldset legend="Cartelera" style="margin-bottom:20px">        
+        <h:panelGrid columns="2" cellpadding="5">            
+            <p:panel id="panel1">
 <p:panelGrid columns="2">
 <h:outputText value="Desde" />
 <p:inputText value="#{backingCartelera.desde}" required="true" />
@@ -27,8 +27,13 @@ xmlns:p="http://primefaces.org/ui">
 <p:commandButton value="Insertar" update="panel1 :form3:tablaSalas"
 action="#{backingSala.accionInsertar()}" icon="ui-icon-disk" />
 </p:panel>
+        </h:panelGrid>
+    </p:fieldset>
 </h:form>
 <h:form id="form3">
+<p:fieldset legend="Carteleras" toggleable="true" toggleSpeed="500">
+        <p:ajax event="toggle" listener="#{eventosPaginas.handleToggle}" />
+        <h:panelGrid columns="2" cellpadding="5">
 <p:dataTable value="#{backingSala.listaSalas}"
 var="p" id="tablaSalas" paginator="true" rows="5">
 <p:column headerText="ID">
@@ -48,6 +53,9 @@ update="tablaSalas"/>
 <p:commandButton action="#{backingSala.accionCargar(p)}" icon="ui-icon-comment"/>
 </p:column>
 </p:dataTable>
+ </h:panelGrid>
+    </p:fieldset>
+<p:commandButton value="Ir al inicio" action="index" icon="ui-icon-star" />
 </h:form>
 </body>
 </html>

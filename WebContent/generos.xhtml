@@ -11,20 +11,28 @@ xmlns:p="http://primefaces.org/ui">
 <body style="font-size:70%">
 <h2>Listado de Generos</h2>
 <h:form id="form1">
-<h:commandLink action="index" value="Ir al inicio..." />
 </h:form>
 <h:form id="form2">
-<p:panel id="panel1" header="Genero">
-<p:messages id="mensajes"/>
+
+<p:fieldset legend="Generos" style="margin-bottom:20px">        
+        <h:panelGrid columns="2" cellpadding="5">            
+            <p:panel id="panel1">
 <p:panelGrid columns="2">
 <h:outputText value="Genero" />
-<p:inputText value="#{backingGenero.genero}" required="true" />
+<p:inputText value="#{backingGenero.genero}" required="true" size="50"/>
 </p:panelGrid>
 <p:commandButton value="Insertar" update="panel1 :form3:tablaGeneros"
 action="#{backingGenero.accionInsertar()}" icon="ui-icon-disk" />
 </p:panel>
+        </h:panelGrid>
+    </p:fieldset>
+
 </h:form>
 <h:form id="form3">
+
+<p:fieldset legend="Generos" toggleable="true" toggleSpeed="500">
+        <p:ajax event="toggle" listener="#{eventosPaginas.handleToggle}" />
+        <h:panelGrid columns="2" cellpadding="5">
 <p:dataTable value="#{backingGenero.listaGeneros}"
 var="p" id="tablaGeneros" paginator="true" rows="4">
 <p:column headerText="ID">
@@ -41,6 +49,9 @@ update="tablaGeneros"/>
 <p:commandButton action="#{backingGenero.accionCargar(p)}" icon="ui-icon-comment"/>
 </p:column>
 </p:dataTable>
+ </h:panelGrid>
+    </p:fieldset>
+    <p:commandButton value="Ir al inicio" action="index" icon="ui-icon-star" />
 </h:form>
 </body>
 </html>

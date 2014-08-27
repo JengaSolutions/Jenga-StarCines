@@ -11,11 +11,12 @@ xmlns:p="http://primefaces.org/ui">
 <body style="font-size:70%">
 <h2>Listado de Peliculas</h2>
 <h:form id="form1">
-<h:commandLink action="index" value="Ir al inicio..." />
+
 </h:form>
 <h:form id="form2">
-<p:panel id="panel1" header="Sala">
-<p:messages id="mensajes"/>
+<p:fieldset legend="Pelicula" style="margin-bottom:20px">        
+        <h:panelGrid columns="2" cellpadding="5">            
+            <p:panel id="panel1">
 <p:panelGrid columns="2">
 <h:outputText value="Nombre" />
 <p:inputText value="#{backingPelicula.nombre}" required="true" />
@@ -45,8 +46,13 @@ allowTypes="/(\.|\/)(gif|jpe?g|png)$/" description="Seleccionar imagenes"/>
 <p:commandButton value="Insertar" update="panel1 :form3:tablaPeliculas"
 action="#{backingPelicula.accionInsertar()}" icon="ui-icon-disk" />
 </p:panel>
+        </h:panelGrid>
+    </p:fieldset>
 </h:form>
 <h:form id="form3">
+<p:fieldset legend="Peliculas" toggleable="true" toggleSpeed="500">
+        <p:ajax event="toggle" listener="#{eventosPaginas.handleToggle}" />
+        <h:panelGrid columns="2" cellpadding="5">
 <p:dataTable value="#{backingPelicula.listaPeliculas}"
 var="p" id="tablaPeliculas" paginator="true" rows="5">
 <p:column headerText="ID">
@@ -79,9 +85,6 @@ var="p" id="tablaPeliculas" paginator="true" rows="5">
 <p:column headerText="Subidioma">
 <h:outputText value="#{p.pelSubIdioma}" />
 </p:column>
-<p:column headerText="Trailer">
-<h:outputText value="#{p.pelTrailer}" />
-</p:column>
 <p:column headerText="eliminar">
 <p:commandButton action="#{backingPelicula.accionEliminar(p)}" icon="ui-icon-close"
 update="tablaPeliculas"/>
@@ -90,6 +93,9 @@ update="tablaPeliculas"/>
 <p:commandButton action="#{backingPelicula.accionCargar(p)}" icon="ui-icon-comment"/>
 </p:column>
 </p:dataTable>
+</h:panelGrid>
+    </p:fieldset>
+<p:commandButton value="Ir al inicio" action="index" icon="ui-icon-star" />
 </h:form>
 </body>
 </html>

@@ -7,6 +7,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
+import org.primefaces.event.ToggleEvent;
+
 import starcines.model.entities.Genero;
 import starcines.model.manager.ManagerGestionApp;
 
@@ -111,4 +113,5 @@ public class BackingGenero {
 		} //ir ala pagina productos.xhtml:
 		return "generos";
 		}
+	
 }
