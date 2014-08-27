@@ -21,11 +21,9 @@ xmlns:p="http://primefaces.org/ui">
 <p:inputText value="#{backingCartelera.desde}" required="true" />
 <h:outputText value="Hasta" />
 <p:inputText value="#{backingCartelera.hasta}" required="true" />
-<h:outputText value="Hasta" />
-<p:inputText value="#{backingCartelera.hasta}" required="true" />
 </p:panelGrid>
-<p:commandButton value="Insertar" update="panel1 :form3:tablaSalas"
-action="#{backingSala.accionInsertar()}" icon="ui-icon-disk" />
+<p:commandButton value="Insertar" update="panel1 :form3:tablaCarteleras"
+action="#{backingCartelera.accionInsertar()}" icon="ui-icon-disk" />
 </p:panel>
         </h:panelGrid>
     </p:fieldset>
@@ -34,23 +32,23 @@ action="#{backingSala.accionInsertar()}" icon="ui-icon-disk" />
 <p:fieldset legend="Carteleras" toggleable="true" toggleSpeed="500">
         <p:ajax event="toggle" listener="#{eventosPaginas.handleToggle}" />
         <h:panelGrid columns="2" cellpadding="5">
-<p:dataTable value="#{backingSala.listaSalas}"
-var="p" id="tablaSalas" paginator="true" rows="5">
+<p:dataTable value="#{backingCartelera.listaCarteleras}"
+var="p" id="tablaCarteleras" paginator="true" rows="5">
 <p:column headerText="ID">
 <h:outputText value="#{p.carId}" />
 </p:column>
-<p:column headerText="Nombre">
-<h:outputText value="#{p.nombre}" />
+<p:column headerText="Desde">
+<h:outputText value="#{p.carDesde}" />
 </p:column>
-<p:column headerText="Formato">
-<h:outputText value="#{p.formato}" />
+<p:column headerText="Hasta">
+<h:outputText value="#{p.carHasta}" />
 </p:column>
 <p:column headerText="eliminar">
-<p:commandButton action="#{backingSala.accionEliminar(p)}" icon="ui-icon-close"
-update="tablaSalas"/>
+<p:commandButton action="#{backingCartelera.accionEliminar(p)}" icon="ui-icon-close"
+update="tablaCarteleras"/>
 </p:column>
 <p:column headerText="actualizar">
-<p:commandButton action="#{backingSala.accionCargar(p)}" icon="ui-icon-comment"/>
+<p:commandButton action="#{backingCartelera.accionCargar(p)}" icon="ui-icon-comment"/>
 </p:column>
 </p:dataTable>
  </h:panelGrid>
