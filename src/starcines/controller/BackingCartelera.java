@@ -1,5 +1,6 @@
 package starcines.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -7,6 +8,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.model.SelectItem;
 
 import starcines.model.entities.Cartelera;
 import starcines.model.entities.Pelicula;
@@ -150,4 +152,26 @@ public class BackingCartelera {
 		} //ir ala pagina productos.xhtml:
 		return "carteleras";
 		}
+	
+	public List<SelectItem> getListaPeliculas(){
+		List<SelectItem> listadoSI=new ArrayList<SelectItem>();
+		List<Pelicula> listadoPeliculas=manager.findAllPelicula();
+		
+		for(Pelicula p:listadoPeliculas){
+			SelectItem item=new SelectItem(p.getPelId(), p.getPelNombre());
+			listadoSI.add(item);
+		}
+		return listadoSI;
+	}
+	
+	public List<SelectItem> getListaSalas(){
+		List<SelectItem> listadoSI=new ArrayList<SelectItem>();
+		List<Sala> listadoSalas=manager.findAllSalas();
+		
+		for(Sala s:listadoSalas){
+			SelectItem item=new SelectItem(s.getSalId(), s.getSalNombre());
+			listadoSI.add(item);
+		}
+		return listadoSI;
+	}
 }

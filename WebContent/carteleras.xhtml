@@ -18,9 +18,19 @@ xmlns:p="http://primefaces.org/ui">
             <p:panel id="panel1">
 <p:panelGrid columns="2">
 <h:outputText value="Desde" />
-<p:inputText value="#{backingCartelera.desde}" required="true" />
+<p:calendar value="#{backingCartelera.desde}" mode="popup"
+showOn="button" popupIconOnly="true" />
 <h:outputText value="Hasta" />
-<p:inputText value="#{backingCartelera.hasta}" required="true" />
+<p:calendar value="#{backingCartelera.hasta}" mode="popup"
+showOn="button" popupIconOnly="true" />
+<h:outputText value="Pelicula:" />
+				<h:selectOneMenu value="#{backingCartelera.pel_id}">
+					<f:selectItems value="#{backingCartelera.listaPeliculas}" />
+				</h:selectOneMenu>
+<h:outputText value="Sala:" />
+				<h:selectOneMenu value="#{backingCartelera.sal_id}">
+					<f:selectItems value="#{backingCartelera.listaSalas}" />
+				</h:selectOneMenu>
 </p:panelGrid>
 <p:commandButton value="Insertar" update="panel1 :form3:tablaCarteleras"
 action="#{backingCartelera.accionInsertar()}" icon="ui-icon-disk" />
