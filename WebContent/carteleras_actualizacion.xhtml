@@ -1,11 +1,40 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<title>Insert title here</title>
-</head>
-<body>
-
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:p="http://primefaces.org/ui">
+<h:head>
+<title>Carteleras</title>
+</h:head>
+<body style="font-size:70%">
+<h:form id="form1">
+<p:panel header="Actualizacion de carteleras">
+<p:panelGrid columns="2">
+<h:outputText value="ID" />
+<h:panelGroup>
+<h:outputText value="#{backingCartelera.id}" />
+<h:inputHidden value="#{backingCartelera.id}" />
+<h:outputText value="Desde" />
+<p:calendar value="#{backingCartelera.desde}" mode="popup"
+showOn="button" popupIconOnly="true" />
+<h:outputText value="Hasta" />
+<p:calendar value="#{backingCartelera.hasta}" mode="popup"
+showOn="button" popupIconOnly="true" />
+<h:outputText value="Pelicula:" />
+				<h:selectOneMenu value="#{backingCartelera.pel_id}">
+					<f:selectItems value="#{backingCartelera.listaPeliculas}" />
+				</h:selectOneMenu>
+<h:outputText value="Sala:" />
+				<h:selectOneMenu value="#{backingCartelera.sal_id}">
+					<f:selectItems value="#{backingCartelera.listaSalas}" />
+				</h:selectOneMenu>
+</h:panelGroup>
+<p:commandButton value="Actualizar"
+action="#{backingCartelera.accionActualizar}" />
+<p:messages />
+</p:panelGrid>
+</p:panel>
+</h:form>
 </body>
 </html>

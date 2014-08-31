@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<h:outputStylesheet library="css" name="styles.css" />
+	<title>StarCines</title>
+</h:head>
+<h:body style="font-size:70%">
+<center>
+	<h:graphicImage id="image" alt="jsf-logo" url="/img/StarCines-logo.png" width="300px" height="110px">
+    </h:graphicImage>
+	</center>
+	<h:form>		
+				<p:menubar>
+					<p:submenu label="Opciones del sistema" icon="ui-icon-document">
+						<p:menuitem value="Generos" outcome="generos"
+							icon="ui-icon-newwin" />
+							<p:menuitem value="Salas" outcome="salas"
+							icon="ui-icon-newwin" />
+							<p:menuitem value="Peliculas" outcome="peliculas"
+							icon="ui-icon-newwin" />
+							<p:menuitem value="Carteleras" outcome="carteleras"
+							icon="ui-icon-newwin" />							
+					</p:submenu>
+					<p:menuitem value="Registrar Usuarios" outcome="usuarios" icon="ui-icon-newwin" />	
+					<p:menuitem value="Salir" outcome="index" icon="ui-icon-close" />						
+				</p:menubar>
+				<p:panel>
+				    <h3>Orientation - Top|Bottom|Left|Right</h3>
+    <p:tabView orientation="left">
+        <p:tab title="Godfather Part I">
+            <h:panelGrid columns="2" cellpadding="10">
+                <p:graphicImage url="/img/godfather1.jpg" />
+                <h:outputText
+                    value="The story begins as Don Vito Corleone..." />
+            </h:panelGrid>
+        </p:tab>
+        <p:tab title="Godfather Part II">
+            <h:panelGrid columns="2" cellpadding="10">
+                <p:graphicImage url="/img/godfather2.jpg" />
+                <h:outputText value="Francis Ford Coppola's legendary..." />
+            </h:panelGrid>
+        </p:tab>
+        <p:tab title="Godfather Part III">
+            <h:panelGrid columns="2" cellpadding="10">
+                <p:graphicImage url="/img/godfather3.jpg" />
+                <h:outputText value="After a break of more than 15 years..." />
+            </h:panelGrid>
+        </p:tab>
+    </p:tabView>
+				</p:panel>
+	</h:form>
+</h:body>
+</html>

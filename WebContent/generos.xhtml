@@ -26,10 +26,8 @@ action="#{backingGenero.accionInsertar()}" icon="ui-icon-disk" />
 </p:panel>
         </h:panelGrid>
     </p:fieldset>
-
 </h:form>
 <h:form id="form3">
-
 <p:fieldset legend="Generos" toggleable="true" toggleSpeed="500">
         <p:ajax event="toggle" listener="#{eventosPaginas.handleToggle}" />
         <h:panelGrid columns="2" cellpadding="5">
@@ -51,7 +49,7 @@ update="tablaGeneros"/>
 </p:dataTable>
  </h:panelGrid>
     </p:fieldset>
-    <p:commandButton value="Ir al inicio" action="index" icon="ui-icon-star" />
+    <p:commandButton value="Ir al inicio" action="principal" icon="ui-icon-star" />
 </h:form>
 </body>
 </html>

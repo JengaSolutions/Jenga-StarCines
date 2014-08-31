@@ -14,43 +14,24 @@
     </h:graphicImage>
 	</center>
 	<h:form>		
-				<p:menubar>
-					<p:submenu label="Opciones del sistema" icon="ui-icon-document">
-						<p:menuitem value="Generos" outcome="generos"
-							icon="ui-icon-newwin" />
-							<p:menuitem value="Salas" outcome="salas"
-							icon="ui-icon-newwin" />
-							<p:menuitem value="Peliculas" outcome="peliculas"
-							icon="ui-icon-newwin" />
-							<p:menuitem value="Carteleras" outcome="carteleras"
-							icon="ui-icon-newwin" />							
-					</p:submenu>
-					<p:menuitem value="Salir" url="http://www.primefaces.org" icon="ui-icon-close" />					
-				</p:menubar>
-				<p:panel>
-				    <h3>Orientation - Top|Bottom|Left|Right</h3>
-    <p:tabView orientation="left">
-        <p:tab title="Godfather Part I">
-            <h:panelGrid columns="2" cellpadding="10">
-                <p:graphicImage url="/img/godfather1.jpg" />
-                <h:outputText
-                    value="The story begins as Don Vito Corleone..." />
-            </h:panelGrid>
-        </p:tab>
-        <p:tab title="Godfather Part II">
-            <h:panelGrid columns="2" cellpadding="10">
-                <p:graphicImage url="/img/godfather2.jpg" />
-                <h:outputText value="Francis Ford Coppola's legendary..." />
-            </h:panelGrid>
-        </p:tab>
-        <p:tab title="Godfather Part III">
-            <h:panelGrid columns="2" cellpadding="10">
-                <p:graphicImage url="/img/godfather3.jpg" />
-                <h:outputText value="After a break of more than 15 years..." />
-            </h:panelGrid>
-        </p:tab>
-    </p:tabView>
-				</p:panel>
+		<p:fieldset legend="Inicio de Sesion" toggleable="true" toggleSpeed="500">
+        <p:ajax event="toggle" listener="#{eventosPaginas.handleToggle}" />
+        <h:panelGrid columns="3">
+			<h:outputText value="Usuario">
+			</h:outputText>
+			<p:inputText required="true" id="nick" requiredMessage="Requerido" value="#{beanUsuario.nick}">
+			</p:inputText>
+			<p:message for="nick">
+			</p:message>
+			<h:outputText value="Contraseña">
+			</h:outputText>
+			<p:inputText type="password" required="true" id="pass" requiredMessage="Requerido" value="#{beanUsuario.contrasena}">
+			</p:inputText>
+			<p:message for="pass">
+			</p:message>
+			<p:commandButton value="Acceder" action="#{beanUsuario.accesoUsuario}"></p:commandButton>
+		</h:panelGrid>
+    </p:fieldset>
 	</h:form>
 </h:body>
 </html>

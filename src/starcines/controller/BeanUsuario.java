@@ -123,4 +123,25 @@ public class BeanUsuario {
 		return "index";
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String accesoUsuario() throws Exception{
+		String dir="";
+		Usuario u = manager.findByIdUsuario(nick);
+		if(u.getUsuPass().equals(contrasena)){
+			dir="principal";
+		}
+		else{
+			dir="error";
+		}
+		if (dir.length()>1){
+			nick=u.getUsuNick();
+			contrasena=u.getUsuPass();
+		}
+		return dir;
+		}
+	
 }

@@ -6,49 +6,43 @@ xmlns:f="http://java.sun.com/jsf/core"
 xmlns:p="http://primefaces.org/ui">
 <h:head>
 <h:outputStylesheet library="css" name="styles.css" />
-<title>Salas</title>
+<title>Usuarios</title>
 </h:head>
 <body style="font-size:70%">
-<h2>Listado de Salas</h2>
+<h2>Listado de Usuarios</h2>
 <h:form id="form1">
 </h:form>
 <h:form id="form2">
-<p:fieldset legend="Salas" style="margin-bottom:20px">        
+<p:fieldset legend="Usuario" style="margin-bottom:20px">        
         <h:panelGrid columns="2" cellpadding="5">            
             <p:panel id="panel1">
 <p:panelGrid columns="2">
-<h:outputText value="Nombre de la sala" />
-<p:inputText value="#{backingSala.nombre}" required="true" />
-<h:outputText value="Formato de la sala" />
-<p:inputText value="#{backingSala.formato}" required="true" />
+<h:outputText value="Nombre de usuario:" />
+<p:inputText value="#{beanUsuario.nick}" required="true" size="50"/>
+<h:outputText value="Contraseña:" />
+<p:inputText type="password" required="true" value="#{beanUsuario.contrasena}" />
 </p:panelGrid>
-<p:commandButton value="Insertar" update="panel1 :form3:tablaSalas"
-action="#{backingSala.accionInsertar()}" icon="ui-icon-disk" />
+<p:commandButton value="Insertar" update="panel1 :form3:tablaUsuarios"
+action="#{beanUsuario.accionCrearUsuario()}" icon="ui-icon-disk" />
 </p:panel>
         </h:panelGrid>
     </p:fieldset>
 </h:form>
 <h:form id="form3">
-<p:fieldset legend="Salas" toggleable="true" toggleSpeed="500">
+<p:fieldset legend="Usuarios" toggleable="true" toggleSpeed="500">
         <p:ajax event="toggle" listener="#{eventosPaginas.handleToggle}" />
         <h:panelGrid columns="2" cellpadding="5">
-<p:dataTable value="#{backingSala.listaSalas}"
-var="p" id="tablaSalas" paginator="true" rows="5">
-<p:column headerText="ID">
-<h:outputText value="#{p.salId}" />
-</p:column>
-<p:column headerText="Nombre">
-<h:outputText value="#{p.salNombre}" />
-</p:column>
-<p:column headerText="Formato">
-<h:outputText value="#{p.salFormato}" />
+<p:dataTable value="#{beanUsuario.listUsuarios}"
+var="p" id="tablaUsuarios" paginator="true" rows="5">
+<p:column headerText="Usuario">
+<h:outputText value="#{p.usuNick}" />
 </p:column>
 <p:column headerText="eliminar">
-<p:commandButton action="#{backingSala.accionEliminar(p)}" icon="ui-icon-close"
-update="tablaSalas"/>
+<p:commandButton action="#{beanUsuario.accionEliminar(p)}" icon="ui-icon-close"
+update="tablaUsuarios"/>
 </p:column>
 <p:column headerText="actualizar">
-<p:commandButton action="#{backingSala.accionCargar(p)}" icon="ui-icon-comment"/>
+<p:commandButton action="#{beanUsuario.accionCargar(p)}" icon="ui-icon-comment"/>
 </p:column>
 </p:dataTable>
  </h:panelGrid>
