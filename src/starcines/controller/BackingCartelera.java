@@ -26,8 +26,8 @@ public class BackingCartelera {
 	}
 	
 	private Integer id;
-	private Pelicula pel_id;
-	private Sala sal_id;
+	private Integer pel_id;
+	private Integer sal_id;
 	private Date desde;
 	private Date hasta;
 	public Integer getId() {
@@ -36,16 +36,16 @@ public class BackingCartelera {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public Pelicula getPel_id() {
+	public Integer getPel_id() {
 		return pel_id;
 	}
-	public void setPel_id(Pelicula pel_id) {
+	public void setPel_id(Integer pel_id) {
 		this.pel_id = pel_id;
 	}
-	public Sala getSal_id() {
+	public Integer getSal_id() {
 		return sal_id;
 	}
-	public void setSal_id(Sala sal_id) {
+	public void setSal_id(Integer sal_id) {
 		this.sal_id = sal_id;
 	}
 	public Date getDesde() {
@@ -78,9 +78,12 @@ public class BackingCartelera {
 		Cartelera c=new Cartelera();	
 		c.setCarDesde(desde);
 		c.setCarHasta(hasta);
-		c.setPelicula(pel_id);
-		c.setSala(sal_id);
+
 		try {
+			Pelicula p = manager.findPeliculaById(pel_id);
+			c.setPelicula(p);
+			Sala s=manager.findSalaById(sal_id);
+			c.setSala(s);
 			// guardamos en la bdd:
 			manager.insertarCartelera(c);
 			// limpiamos los datos del formulario:
@@ -121,8 +124,8 @@ public class BackingCartelera {
 		id=c.getCarId();
 		desde=c.getCarDesde();
 		hasta=c.getCarHasta();
-		pel_id=c.getPelicula();
-		sal_id=c.getSala();
+		pel_id=c.getPelicula().getPelId();
+		sal_id=c.getSala().getSalId();
 		return "carteleras_actualizacion";
 	}
 	
@@ -136,9 +139,12 @@ public class BackingCartelera {
 		c=new Cartelera();
 		c.setCarDesde(desde);
 		c.setCarHasta(hasta);
-		c.setPelicula(pel_id);
-		c.setSala(sal_id);
+		
 		try {
+			Pelicula p = manager.findPeliculaById(pel_id);
+			c.setPelicula(p);
+			Sala s=manager.findSalaById(sal_id);
+			c.setSala(s);
 		//hacemos la actualizacion:
 		manager.actualizarCartelera(c);
 		//inicializamos las propiedades para limpiar el formulario:

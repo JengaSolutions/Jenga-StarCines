@@ -22,13 +22,13 @@ showOn="button" popupIconOnly="true" />
 <p:calendar value="#{backingCartelera.hasta}" mode="popup"
 showOn="button" popupIconOnly="true" />
 <h:outputText value="Pelicula:" />
-				<h:selectOneMenu value="#{backingCartelera.pel_id}">
+				<p:selectOneMenu value="#{backingCartelera.pel_id}">
 					<f:selectItems value="#{backingCartelera.listaPeliculas}" />
-				</h:selectOneMenu>
+				</p:selectOneMenu>
 <h:outputText value="Sala:" />
-				<h:selectOneMenu value="#{backingCartelera.sal_id}">
+				<p:selectOneMenu value="#{backingCartelera.sal_id}">
 					<f:selectItems value="#{backingCartelera.listaSalas}" />
-				</h:selectOneMenu>
+				</p:selectOneMenu>
 </h:panelGroup>
 <p:commandButton value="Actualizar"
 action="#{backingCartelera.accionActualizar}" />
